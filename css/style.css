@@ -83,3 +83,15 @@ h1 {
     color: #525252;
     font-size: 0.8em;
 }
+
+@media screen and (max-width: 1050px){
+    .photographer_section {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 815px){
+    .photographer_section {
+        grid-template-columns: 1fr;
+    }
+}
