@@ -1,5 +1,5 @@
 function photographerFactory(data) {
-    const { name, portrait, city, country, tagline, price } = data;
+    const { name, portrait, city, country, tagline, price, tag } = data;
 
     const picture = `assets/photographers/Photographers ID Photos/${portrait}`;
 
@@ -23,6 +23,20 @@ function photographerFactory(data) {
         pPrice.className = "price"
         pPrice.textContent = price + "€/jour";
 
+        // show each tag for each photographer
+        const divTags = document.createElement('div');
+        divTags.className = 'photographer-tags';
+        const ul = document.createElement('ul');
+
+        tag.forEach(renderTagsList);
+
+        function renderTagsList(element, index, array){
+            var li = document.createElement('li');
+            ul.appendChild(li);
+            li.innerHTML += array[index];
+            
+        }
+        
         article.appendChild(divPresentation);
         divPresentation.appendChild(img);
         divPresentation.appendChild(h2);
@@ -30,7 +44,9 @@ function photographerFactory(data) {
         divInformation.appendChild(pCity);
         divInformation.appendChild(pTagline);
         divInformation.appendChild(pPrice);
+        article.appendChild(divTags);
+        divTags.appendChild(ul);
         return (article);
     }
-    return { name, picture, city, country, tagline, price, getUserCardDOM }
+    return { name, picture, city, country, tagline, price, tag, getUserCardDOM }
 }
