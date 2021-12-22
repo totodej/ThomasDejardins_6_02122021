@@ -12,11 +12,7 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 90px;
-}
-
-h1 {
-    color: #901C1C;
-    margin-right: 100px;
+    margin-top: 22px;
 }
 
 .logo {
@@ -24,7 +20,42 @@ h1 {
     margin-left: 100px;
 }
 
-.photographer_section {
+.filters ul, .photographer-tags ul {
+    padding-inline-start: 0px;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    display: flex;
+}
+
+nav ul li, .photographer-tags ul li {
+    list-style-type: none;
+    margin: 2px 2px;
+    padding: 1px 5px;
+    border: 1px solid #D3D3D3;
+    border-radius: 14px;
+    color: #901C1C;
+    font-size: 0.8em;
+}
+
+.filters ul li:hover, .photographer-tags ul li:hover {
+    background-color: #901C1C;
+    color : white;
+    cursor: pointer;
+}
+
+.active {
+    background-color: #901C1C;
+    color : white;
+}
+
+h1 {
+    color: #901C1C;
+    margin-right: 100px;
+    font-weight: 500;
+    font-size: 2.2em;
+}
+
+#photographer_section {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 70px;
@@ -32,7 +63,7 @@ h1 {
     margin-bottom: 100px;
 }
 
-.photographer_section article {
+#photographer_section article {
     justify-self: center;
     display: flex;
     justify-content: center;
@@ -42,6 +73,7 @@ h1 {
 
 .presentation {
     text-align: center;
+    text-decoration: none;
 }
 
 .presentation img {
@@ -80,18 +112,51 @@ h1 {
 }
 
 .price {
-    color: #525252;
+    color: #757575;
     font-size: 0.8em;
 }
 
+@media screen and (max-width: 1251px){
+    .filters ul {
+        position: absolute;
+        justify-content: center;
+        flex-flow: row wrap;
+        top: 130px;
+        left: 0;
+        right: 0;
+    }
+}
+
 @media screen and (max-width: 1050px){
-    .photographer_section {
+    #photographer_section {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media screen and (max-width: 815px){
-    .photographer_section {
+    .logo {
+        height: 30px;
+        width: 115px;
+        margin-left: 30px;
+    }
+
+    h1 {
+        font-size: 1.2em;
+        margin-right: 30px;
+    }
+    
+    #photographer_section {
         grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 399px){
+    .logo {
+        height: 25px;
+        width: 100px;
+    }
+
+    h1 {
+        font-size: 0.8em;
     }
 }
