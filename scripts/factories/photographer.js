@@ -1,52 +1,57 @@
 function photographerFactory(data) {
-    const { name, portrait, city, country, tagline, price, tag } = data;
+  const { name, portrait, city, country, tagline, price, tag, id } = data;
+  const picture = `assets/photographers/Photographers_ID_Photos/${portrait}`;
+  const adress = `photographer.html?id=${id}`;
 
-    const picture = `assets/photographers/Photographers ID Photos/${portrait}`;
+  function getUserCardDOM() {
+    // show informations for each photographers
+    const article = document.createElement("article");
+    const divPresentation = document.createElement("a");
+    const img = document.createElement("img");
+    const h2 = document.createElement("h2");
+    const divInformation = document.createElement("div");
+    const pCity = document.createElement("p");
+    const pTagline = document.createElement("p");
+    const pPrice = document.createElement("p");
+    const divTags = document.createElement("div");
+    const ul = document.createElement("ul");
 
-    function getUserCardDOM() {
-        const article = document.createElement( 'article' );
-        const divPresentation = document.createElement('div');
-        divPresentation.className = "presentation";
-        const img = document.createElement( 'img' );
-        img.setAttribute("src", picture)
-        const h2 = document.createElement( 'h2' );
-        h2.textContent = name;
-        const divInformation = document.createElement('div');
-        divInformation.className = "informations";
-        const pCity = document.createElement('p');
-        pCity.className = "location";
-        pCity.textContent = city + ", " + country;
-        const pTagline = document.createElement('p');
-        pTagline.className = "tagline";
-        pTagline.textContent = tagline;
-        const pPrice = document.createElement('p');
-        pPrice.className = "price"
-        pPrice.textContent = price + "€/jour";
+    divPresentation.className = "presentation";
+    divInformation.className = "informations";
+    pCity.className = "location";
+    pTagline.className = "tagline";
+    pPrice.className = "price";
+    divTags.className = "photographer-tags";
 
-        // show each tag for each photographer
-        const divTags = document.createElement('div');
-        divTags.className = 'photographer-tags';
-        const ul = document.createElement('ul');
+    h2.textContent = name;
+    pCity.textContent = city + ", " + country;
+    pTagline.textContent = tagline;
+    pPrice.textContent = price + "€/jour";
 
-        tag.forEach(renderTagsList);
+    divPresentation.setAttribute("href", adress);
+    img.setAttribute("src", picture);
 
-        function renderTagsList(element, index, array){
-            var li = document.createElement('li');
-            ul.appendChild(li);
-            li.innerHTML += array[index];
-            
-        }
+    function renderTagsList(element, index, array) {
+      const li = document.createElement("li");
         
-        article.appendChild(divPresentation);
-        divPresentation.appendChild(img);
-        divPresentation.appendChild(h2);
-        article.appendChild(divInformation);
-        divInformation.appendChild(pCity);
-        divInformation.appendChild(pTagline);
-        divInformation.appendChild(pPrice);
-        article.appendChild(divTags);
-        divTags.appendChild(ul);
-        return (article);
+      ul.appendChild(li);
+      li.innerHTML += array[index];
     }
-    return { name, picture, city, country, tagline, price, tag, getUserCardDOM }
+
+    tag.forEach(renderTagsList);
+
+    article.appendChild(divPresentation);
+    divPresentation.appendChild(img);
+    divPresentation.appendChild(h2);
+    article.appendChild(divInformation);
+    divInformation.appendChild(pCity);
+    divInformation.appendChild(pTagline);
+    divInformation.appendChild(pPrice);
+    article.appendChild(divTags);
+    divTags.appendChild(ul);
+
+    return article;
+  }
+
+   return { name, picture, city, country, tagline, price, tag, id, getUserCardDOM };
 }
