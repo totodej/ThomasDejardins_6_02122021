@@ -176,6 +176,11 @@ function displayPhotographerInfo(photographer) {
   displayPhotographer(photographer);
   displayMoreInfos(price, medias);
   getPictures(medias);
+
+  const contactMe = document.getElementById("contact-me");
+  contactMe.addEventListener("click", displayModal);
+  const profilName = document.getElementById("profil-name");
+  profilName.textContent = photographer.name;
 }
 
 async function init() {
