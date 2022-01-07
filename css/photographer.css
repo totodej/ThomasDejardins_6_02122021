@@ -2,6 +2,8 @@
     display: none;
 }
 
+/**************** Photographer Profil ****************/
+
 #photograph-header {
     background-color: #FAFAFA;
     height: 313px;
@@ -25,39 +27,7 @@
     margin-right: 50px;
 }
 
-.profilInformations {
-    margin-left: 50px;
-}
-
-.profilInformations h1 {
-    margin-block-start: 0px;
-    margin-block-end: 0px;
-    margin-top: 65px;
-    color : #D3573C;
-    font-size: 3.5em;
-    font-weight: 500;
-    margin-right: 0px;
-}
-
-.locationProfil {
-    margin-block-start: 0px;
-    margin-block-end: 0px;
-    color: #901C1C;
-    font-size: 1.5em;
-    font-weight: 500;
-    margin-top: 16px;
-}
-
-.taglineProfil {
-    margin-block-start: 0px;
-    margin-block-end: 0px;
-    color: #525252;
-    font-weight: 500;
-    font-size: 1.12em;
-    margin-top: 19px;
-}
-
-.contact_button {
+#contact-me {
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -71,63 +41,173 @@
     margin: auto;
 }
 
-.modal {
-    border-radius: 5px;
-    background-color: #DB8876;
-    width: 50%;
+.more-informations {
+    position: fixed;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    background-color: #DB8876;
+    bottom: 0;
+    right: 36px;
+    width: 376px;
     justify-content: space-between;
-    padding: 35px;
+    font-size: 1.5em;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.more-informations p {
+    margin-block-end: 0.5em;
+}
+
+.profil-informations {
+    margin-left: 50px;
+}
+
+.profil-informations h1 {
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-top: 65px;
+    color : #D3573C;
+    font-size: 3.5em;
+    font-weight: 500;
+    margin-right: 0px;
+}
+
+.location-profil {
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    color: #901C1C;
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-top: 16px;
+}
+
+.tagline-profil {
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    color: #525252;
+    font-weight: 500;
+    font-size: 1.12em;
+    margin-top: 19px;
+}
+
+/**************** Gallery Medias ****************/
+
+#medias-photograph {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 30px;
+    margin: 0px 55px;
+    margin-top: 54px;
+}
+
+.media {
+    width: 350px;
     margin: auto;
 }
 
-.modal header {
-    justify-content: space-between;
-    width: 100%;
-}
-
-.modal header img {
-    cursor: pointer;
-}
-
-.modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
-}
-
-form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-form label {
-    color: #312E2E;
-    font-size: 36px;
-}
-
-form div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
-}
-
-form input {
-    width: 100%;
-    height: 68px;
-    border: none;
+.media img, .media video {
+    width: 350px;
+    height: 300px;
+    object-fit: cover;
     border-radius: 5px;
+}
+
+.informations-media {
+    display: flex;
+    justify-content: space-between;
+}
+
+.informations-media p{
+    color: #901C1C;
+    font-size: 1.5em;
+    padding-right: 30px;;
+}
+
+.likes {
+    display: flex;   
+    padding: 0px 0px 31px;
+}
+
+.likes p {
+    padding-right: initial;
+}
+
+.fa-heart {
+    margin: auto;
+    color: #901C1C;
+}
+
+/**************** LightBox ****************/
+
+#media-modal {
+    background-color: #fff;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: auto;
+    display: none;
+}
+
+#slide {
+    background-color: #fff;
+    height: 90%;
+    left: 50%;
+    margin: 0 auto;
+    position: fixed;
+    text-align: center;
+    top: 10%;
+    transform: translate(-50%, 0);
+    width: 60%;
+}
+
+#slide img, #slide video {
+    margin: auto;
+    display: block;
+    height: 80%;
+    object-fit: contain;
+    width: 100%;
+}
+
+#slide p {
+    color: #901C1C;
+    font-size: 1.2em;
+}
+
+#close-slide {
+    color: #901C1C;
+    position: absolute;
+    top: 0%;
+    font-size: 42px;
+    left: 100%;
+}
+
+#prev-slide {
+    color: #901C1C;
+    position: absolute;
+    top: 40%;
+    font-size: 42px;
+    left: -3%;
+}
+
+#next-slide {
+    color: #901C1C;
+    position: absolute;
+    top: 40%;
+    font-size: 42px;
+    left: 100%;
 }
 
 @media screen and (max-width: 1410px){
     .profilInformations h1 {
         font-size: 2.5em;
+    }
+}
+
+@media screen and (max-width: 1410px){
+    #medias-photograph {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -137,7 +217,7 @@ form input {
         grid-template-columns: 1fr 250px;
     }
     
-    .contact_button {
+    #contact-me {
         position: fixed;
         left: 0;
         right: 0;
@@ -172,6 +252,12 @@ form input {
     }
     .locationProfil {
         font-size: 1.1em;
+    }
+}
+
+@media screen and (max-width: 850px){
+    #medias-photograph {
+        display: block;
     }
 }
 
