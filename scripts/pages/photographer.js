@@ -22,6 +22,7 @@ async function getPictures(medias) {
     displayPicture(media);
   });
 
+  sortMedias(medias);
   clickHeart();
 
   // add title for videos without title
@@ -47,6 +48,67 @@ async function getPictures(medias) {
     );
 
     mediasPhotograph.appendChild(userGaleryDOM);
+  }
+
+  // sort medias
+  function sortMedias(medias) {
+    const sort = document.getElementById("sort");
+    sort.addEventListener("change", function () {
+      if (sort.value === "popularity") {
+        sortByLikes(medias);
+      }
+      if (sort.value === "date") {
+        sortByDate(medias);
+      }
+      if (sort.value === "title") {
+        sortByTitle(medias);
+      }
+    });
+
+    // sort all medias by Likes
+    async function sortByLikes(medias) {
+      const mediasPhotograph = document.getElementById("medias-photograph");
+
+      medias.sort((itemMax, itemMin) => itemMin.likes - itemMax.likes);
+      mediasPhotograph.textContent = "";
+      medias.forEach(function (media) {
+        displayPicture(media);
+      });
+    }
+
+    // sort all medias by date
+    async function sortByDate(medias) {
+      const mediasPhotograph = document.getElementById("medias-photograph");
+
+      medias.sort(
+        (itemMax, itemMin) => new Date(itemMin.date) - new Date(itemMax.date)
+      );
+      mediasPhotograph.textContent = "";
+      medias.forEach(function (media) {
+        displayPicture(media);
+      });
+    }
+
+    // sort all medias by title
+    async function sortByTitle(medias) {
+      const mediasPhotograph = document.getElementById("medias-photograph");
+
+      function compare(itemA, itemB) {
+        if (itemA.title < itemB.title) {
+          return -1;
+        }
+        if (itemA.title > itemB.title) {
+          return 1;
+        }
+        return 0;
+      }
+
+      medias.sort(compare);      
+      mediasPhotograph.textContent = "";
+      medias.forEach(function (media) {
+        displayPicture(media);
+      });
+    }
   }
 
   // add heart to each media
