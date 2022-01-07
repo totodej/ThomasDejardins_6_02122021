@@ -22,6 +22,8 @@ async function getPictures(medias) {
     displayPicture(media);
   });
 
+  clickHeart();
+
   // add title for videos without title
   function addTitleForVideo(media) {
     if (media.title === undefined) {
@@ -33,7 +35,6 @@ async function getPictures(medias) {
 
     return media;
   }
-
   // display medias
   async function displayPicture(media) {
     const mediasPhotograph = document.getElementById("medias-photograph");
@@ -46,7 +47,35 @@ async function getPictures(medias) {
     );
 
     mediasPhotograph.appendChild(userGaleryDOM);
-  }  
+  }
+
+  // add heart to each media
+  async function clickHeart() {
+    let heartClick = document.getElementsByClassName("heart-click");
+    let totalLikes = Number(
+      document.querySelector(".total-likes p").textContent
+    );
+
+    heartClick = [].slice.call(heartClick);
+    heartClick.forEach(function (element) {
+      element.addEventListener("click", function (e) {
+        let likes = Number(e.target.parentNode.firstElementChild.textContent);
+        if (element.matches(".far")) {
+          element.classList.replace("far", "fas");
+          likes = ++likes;
+          totalLikes = ++totalLikes;
+          e.target.parentNode.firstElementChild.textContent = likes;
+          document.querySelector(".total-likes p").textContent = totalLikes;
+        } else if (element.matches(".fas")) {
+          element.classList.replace("fas", "far");
+          likes = --likes;
+          totalLikes = --totalLikes;
+          e.target.parentNode.firstElementChild.textContent = likes;
+          document.querySelector(".total-likes p").textContent = totalLikes;
+        }
+      });
+    });
+  }
 }
 
 function getUserGalleryDOM(title, id, likes, image, video) {
@@ -92,6 +121,37 @@ function getUserGalleryDOM(title, id, likes, image, video) {
   return divMedia;
 }
 
+// display total hearts and the price per day
+function displayMoreInfos(price, medias) {
+  const photographHeader = document.getElementById("photograph-header");
+  const divInfo = document.createElement("div");
+  const divHeart = document.createElement("div");
+  const pHeart = document.createElement("p");
+  const heart = document.createElement("i");
+  const pPrice = document.createElement("p");
+
+  let likes = 0;
+
+  divInfo.className = "more-informations";
+  divHeart.className = "total-likes";
+  pPrice.className = "price-photographer";
+  heart.className = "fas fa-heart";
+
+  medias.forEach(function (media) {
+    likes += media.likes;
+  });
+
+  pPrice.textContent = price + "€ / jour";
+
+  photographHeader.appendChild(divInfo);
+  divInfo.appendChild(divHeart);
+  divInfo.appendChild(pPrice);
+  divHeart.appendChild(pHeart);
+  divHeart.appendChild(heart);
+
+  pHeart.textContent = likes;
+}
+
 function getPhotographersInfoById(photographerData, id) {
   const photographer = photographerData.photographers.find(
     (photographer) => photographer.id === id
@@ -114,6 +174,7 @@ function displayPhotographerInfo(photographer) {
   const { price, medias } = photographer;
 
   displayPhotographer(photographer);
+  displayMoreInfos(price, medias);
   getPictures(medias);
 }
 
