@@ -100,6 +100,26 @@
     margin-top: 19px;
 }
 
+/**************** Sort Medias ****************/
+
+#sort-medias {
+    margin-top: 20px;
+    margin-left: 100px;
+}
+
+#sort-medias label {
+    font-weight: bold;
+    font-size: 1.125em;
+}
+
+#sort-medias select {
+    background-color: #901C1C;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.125em;
+}
+
 /**************** Gallery Medias ****************/
 
 #medias-photograph {
@@ -321,15 +341,22 @@ form textarea {
         width: 150px;
         height: 150px;
     }
+
     .profilInformations h1 {
         font-size: 1.5em;
         margin-top: 20px;
     }
+
     .taglineProfil {
         font-size: 1em;
     }
+
     .locationProfil {
         font-size: 1.1em;
+    }
+    
+    #sort-medias {
+        margin-left: 50px;
     }
 }
 
