@@ -17,12 +17,11 @@ async function displayPhotographer(photographer) {
 }
 
 async function getPictures(medias) {
-  medias.forEach(function (media) {
+  medias.forEach(function (media, index) {
     addTitleForVideo(media);
-    displayPicture(media);
+    displayPicture(media, index);
   });
 
-  sortMedias(medias);
   clickHeart();
 
   // add title for videos without title
@@ -37,8 +36,9 @@ async function getPictures(medias) {
     return media;
   }
   // display medias
-  async function displayPicture(media) {
+  async function displayPicture(media, index) {
     const mediasPhotograph = document.getElementById("medias-photograph");
+    const mediaModal = document.getElementById("media-modal");
     const userGaleryDOM = getUserGalleryDOM(
       media.title,
       media.photographerId,
@@ -48,66 +48,207 @@ async function getPictures(medias) {
     );
 
     mediasPhotograph.appendChild(userGaleryDOM);
-  }
 
-  // sort medias
-  function sortMedias(medias) {
-    const sort = document.getElementById("sort");
-    sort.addEventListener("change", function () {
-      if (sort.value === "popularity") {
-        sortByLikes(medias);
-      }
-      if (sort.value === "date") {
-        sortByDate(medias);
-      }
-      if (sort.value === "title") {
-        sortByTitle(medias);
-      }
-    });
+    // display the lightbox    
+    userGaleryDOM.addEventListener("click", function(){
+        let indexMedia = index;
+        displayModalLightBox(media);
+        mediaModal.style.display = "block";
+        closeLighBox(mediaModal); 
 
-    // sort all medias by Likes
-    async function sortByLikes(medias) {
-      const mediasPhotograph = document.getElementById("medias-photograph");
+        const nextMedia = document.getElementById("next-slide");
+        nextMedia.addEventListener("click", nextSlide);
+        const prevMedia = document.getElementById("prev-slide");
+        prevMedia.addEventListener("click", prevSlide); 
+        
+        function nextSlide(){
+            const divSlide = document.getElementById("slide");
+            const pMedia = document.querySelector("#slide p");
+            let currentIndex = indexMedia += 1;
 
-      medias.sort((itemMax, itemMin) => itemMin.likes - itemMax.likes);
-      mediasPhotograph.textContent = "";
-      medias.forEach(function (media) {
-        displayPicture(media);
-      });
+            if(currentIndex === medias.length){
+                mediaModal.style.display = "none";
+                mediaModal.innerHTML = "";
+            } else {
+                if(medias[currentIndex].image === undefined){
+                    const videoMedia = document.createElement("video");
+                    const sourceMedia = document.createElement("source");
+                    const pathVideo = `/assets/photographers/${medias[currentIndex].photographerId}/${medias[currentIndex].video}`;
+                    
+                    divSlide.textContent = "";
+                    pMedia.textContent = medias[currentIndex].title;
+    
+                    sourceMedia.setAttribute("src", pathVideo);
+                    videoMedia.controls = "controls";
+                    divSlide.appendChild(videoMedia);
+                    videoMedia.appendChild(sourceMedia);
+                    divSlide.appendChild(pMedia);
+                    
+                } else {
+                    const imgMedia = document.createElement("img");
+                    const pathImage = `/assets/photographers/${medias[currentIndex].photographerId}/${medias[currentIndex].image}`;
+                    
+                    divSlide.textContent = "";
+                    pMedia.textContent = medias[currentIndex].title;
+    
+                    imgMedia.setAttribute("src", pathImage);
+                    divSlide.appendChild(imgMedia);
+                    divSlide.appendChild(pMedia);
+                } 
+    
+                closeLighBox(mediaModal);
+            }
+        }
+
+        function prevSlide(){
+            const divSlide = document.getElementById("slide");
+            const pMedia = document.querySelector("#slide p");
+            let currentIndex = indexMedia -= 1;
+
+            if(currentIndex === -1){
+                mediaModal.style.display = "none";
+                mediaModal.innerHTML = "";
+            } else {
+                if(medias[currentIndex].image === undefined){
+                    const videoMedia = document.createElement("video");
+                    const sourceMedia = document.createElement("source");
+                    const pathVideo = `/assets/photographers/${medias[currentIndex].photographerId}/${medias[currentIndex].video}`;
+                    
+                    divSlide.textContent = "";
+                    pMedia.textContent = medias[currentIndex].title;
+    
+                    sourceMedia.setAttribute("src", pathVideo);
+                    videoMedia.controls = "controls";
+                    divSlide.appendChild(videoMedia);
+                    videoMedia.appendChild(sourceMedia);
+                    divSlide.appendChild(pMedia);
+                    
+                } else {
+                    const imgMedia = document.createElement("img");
+                    const pathImage = `/assets/photographers/${medias[currentIndex].photographerId}/${medias[currentIndex].image}`;
+                    
+                    divSlide.textContent = "";
+                    pMedia.textContent = medias[currentIndex].title;
+    
+                    imgMedia.setAttribute("src", pathImage);
+                    divSlide.appendChild(imgMedia);
+                    divSlide.appendChild(pMedia);
+                } 
+    
+                closeLighBox(mediaModal)
+            }   
+        }
+    })
+    
+    function displayModalLightBox(media) {
+        const mediaModal = document.getElementById("media-modal");
+        const lightBoxDOM = getLightBoxDOM(
+          media.image,
+          media.video,
+          media.photographerId,
+          media.title
+        );
+  
+        mediaModal.appendChild(lightBoxDOM);
     }
 
-    // sort all medias by date
-    async function sortByDate(medias) {
-      const mediasPhotograph = document.getElementById("medias-photograph");
-
-      medias.sort(
-        (itemMax, itemMin) => new Date(itemMin.date) - new Date(itemMax.date)
-      );
-      mediasPhotograph.textContent = "";
-      medias.forEach(function (media) {
-        displayPicture(media);
-      });
+    function closeLighBox(mediaModal) {
+        const closeSlide = document.getElementById("close-slide");
+        closeSlide.addEventListener("click", function () {
+          mediaModal.style.display = "none";
+          mediaModal.innerHTML = "";
+        });
     }
 
-    // sort all medias by title
-    async function sortByTitle(medias) {
-      const mediasPhotograph = document.getElementById("medias-photograph");
+    function getLightBoxDOM(image, video, id, title) {
+        const divLightbox = document.createElement("div");
+        const divSlide = document.createElement("div");
+        const iClose = document.createElement("i");
+        const iLeft = document.createElement("i");
+        const iRight = document.createElement("i");
+        const p = document.createElement("p");
+          
+        iClose.className = "fas fa-times";
+        iLeft.className = "fas fa-chevron-left";
+        iRight.className = "fas fa-chevron-right";
+        
+        divLightbox.setAttribute("id", "lightboxe")
+        divSlide.setAttribute("id", "slide");
+        iLeft.setAttribute("id", "prev-slide");
+        iRight.setAttribute("id", "next-slide");
+        iClose.setAttribute("id", "close-slide");
+  
+        if (image === undefined) {
+            const videoPic = document.createElement("video");
+            const source = document.createElement("source");
+            const pathVideo = `/assets/photographers/${id}/${video}`;
 
-      function compare(itemA, itemB) {
-        if (itemA.title < itemB.title) {
-          return -1;
-        }
-        if (itemA.title > itemB.title) {
-          return 1;
-        }
-        return 0;
-      }
+            source.setAttribute("src", pathVideo);
+            videoPic.controls = "controls";
 
-      medias.sort(compare);      
-      mediasPhotograph.textContent = "";
-      medias.forEach(function (media) {
-        displayPicture(media);
-      });
+            divSlide.appendChild(videoPic);
+            videoPic.appendChild(source);
+        } else {
+            const img = document.createElement("img");
+            const pathImage = `/assets/photographers/${id}/${image}`;
+  
+            img.setAttribute("src", pathImage);
+            divSlide.appendChild(img);
+        }
+        
+        p.textContent = title;
+
+        divLightbox.appendChild(divSlide);
+        divLightbox.appendChild(iClose);
+        divLightbox.appendChild(iLeft);
+        divLightbox.appendChild(iRight);
+        divSlide.appendChild(p);
+  
+        return divLightbox;
+    }  
+
+    function getUserGalleryDOM(title, id, likes, image, video) {
+        const divMedia = document.createElement("div");
+        const divInformationsMedia = document.createElement("div");
+        const pTitle = document.createElement("p");
+        const divLikes = document.createElement("div");
+        const pLikes = document.createElement("p");
+        const heart = document.createElement("i");
+        
+        pTitle.textContent = title;
+        pLikes.textContent = likes;
+      
+        divMedia.className = "media";
+        divInformationsMedia.className = "informations-media";
+        pTitle.className = "titleMedia";
+        divLikes.className = "likes";
+        heart.className = "far fa-heart heart-click";
+        
+        if (image === undefined) {
+            const videoPic = document.createElement("video");
+            const source = document.createElement("source");
+            const pathVideo = `/assets/photographers/${id}/${video}`;
+
+            source.setAttribute("src", pathVideo);
+            source.setAttribute("type", "video/mp4");
+
+            divMedia.appendChild(videoPic);
+            videoPic.appendChild(source);
+        } else {
+            const img = document.createElement("img");
+            const pathImage = `/assets/photographers/${id}/${image}`;
+
+            img.setAttribute("src", pathImage);
+            divMedia.appendChild(img);
+        }
+      
+        divMedia.appendChild(divInformationsMedia);
+        divInformationsMedia.appendChild(pTitle);
+        divInformationsMedia.appendChild(divLikes);
+        divLikes.appendChild(pLikes);
+        divLikes.appendChild(heart);
+      
+        return divMedia;
     }
   }
 
@@ -138,49 +279,6 @@ async function getPictures(medias) {
       });
     });
   }
-}
-
-function getUserGalleryDOM(title, id, likes, image, video) {
-  const divMedia = document.createElement("div");
-  const img = document.createElement("img");
-  const videoPic = document.createElement("video");
-  const source = document.createElement("source");
-  const divInformationsMedia = document.createElement("div");
-  const pTitle = document.createElement("p");
-  const divLikes = document.createElement("div");
-  const pLikes = document.createElement("p");
-  const heart = document.createElement("i");
-  const pathImage = `/assets/photographers/${id}/${image}`;
-  const pathVideo = `/assets/photographers/${id}/${video}`;
-
-  img.setAttribute("src", pathImage);
-  videoPic.controls = "controls";
-  source.setAttribute("src", pathVideo);
-  source.setAttribute("type", "video/mp4");
-
-  pTitle.textContent = title;
-  pLikes.textContent = likes;
-
-  divMedia.className = "media";
-  divInformationsMedia.className = "informations-media";
-  pTitle.className = "titleMedia";
-  divLikes.className = "likes";
-  heart.className = "far fa-heart heart-click";
-
-  if (image === undefined) {
-    divMedia.appendChild(videoPic);
-    videoPic.appendChild(source);
-  } else {
-    divMedia.appendChild(img);
-  }
-
-  divMedia.appendChild(divInformationsMedia);
-  divInformationsMedia.appendChild(pTitle);
-  divInformationsMedia.appendChild(divLikes);
-  divLikes.appendChild(pLikes);
-  divLikes.appendChild(heart);
-
-  return divMedia;
 }
 
 // display total hearts and the price per day
