@@ -68,6 +68,10 @@
     font-size: 0.9em;
 }
 
+.price-photographer {
+    margin-right: 34px;
+}
+
 .profil-informations {
     margin-left: 50px;
 }
@@ -165,6 +169,86 @@
 .fa-heart {
     margin: auto;
     color: #901C1C;
+}
+
+/**************** LightBox ****************/
+
+#media-modal {
+    background-color: #fff;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: auto;
+    display: none;
+}
+
+#lightboxe {
+    background-color: #fff;
+    height: 90%;
+    left: 50%;
+    margin: 0 auto;
+    position: fixed;
+    text-align: center;
+    top: 10%;
+    transform: translate(-50%, 0);
+    width: 60%;
+}
+
+#slide {
+    background-color: #fff;
+    height: 90%;
+    left: 50%;
+    margin: 0 auto;
+    position: fixed;
+    text-align: center;
+    top: 10%;
+    transform: translate(-50%, 0);
+    width: 60%;
+}
+
+#slide img {
+    margin: auto;
+    display: block;
+    height: 80%;
+    object-fit: contain;
+    width: 100%;
+}
+
+#slide video {
+    margin-top: 50px;
+    width: 100%;
+}
+
+#slide p {
+    color: #901C1C;
+    font-size: 1.2em;
+}
+
+#close-slide {
+    color: #901C1C;
+    position: absolute;
+    top: 0%;
+    font-size: 42px;
+    left: 100%;
+}
+
+#prev-slide {
+    color: #901C1C;
+    position: absolute;
+    top: 40%;
+    font-size: 42px;
+    left: -3%;
+}
+
+#next-slide {
+    color: #901C1C;
+    position: absolute;
+    top: 40%;
+    font-size: 42px;
+    left: 100%;
 }
 
 /**************** Contact Modal ****************/
@@ -354,7 +438,7 @@ form textarea {
     .locationProfil {
         font-size: 1.1em;
     }
-    
+
     #sort-medias {
         margin-left: 50px;
     }
