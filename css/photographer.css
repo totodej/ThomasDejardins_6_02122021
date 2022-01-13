@@ -66,6 +66,7 @@
     color: black;
     margin-top: 29px;
     font-size: 0.9em;
+    margin-left: 5px;
 }
 
 .price-photographer {
@@ -124,6 +125,14 @@
     font-size: 1.125em;
 }
 
+#sort {
+    background-color: #901C1C;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.125em;
+}
+
 /**************** Gallery Medias ****************/
 
 #medias-photograph {
@@ -164,6 +173,7 @@
 
 .likes p {
     padding-right: initial;
+    margin-right: 5px;
 }
 
 .fa-heart {
@@ -175,13 +185,12 @@
 
 #media-modal {
     background-color: #fff;
-    position: fixed;
+    height: 200vw;
     left: 0;
+    position: fixed;
     top: 0;
     width: 100%;
-    height: 100%;
-    z-index: 1;
-    overflow: auto;
+    z-index: 2;
     display: none;
 }
 
@@ -192,39 +201,38 @@
     margin: 0 auto;
     position: fixed;
     text-align: center;
-    top: 10%;
+    top: 3%;
     transform: translate(-50%, 0);
     width: 60%;
 }
 
 #slide {
     background-color: #fff;
-    height: 90%;
-    left: 50%;
+    height: 100%;
     margin: 0 auto;
-    position: fixed;
-    text-align: center;
-    top: 10%;
-    transform: translate(-50%, 0);
-    width: 60%;
+    overflow: hidden;
+    width: 90%;
 }
 
 #slide img {
-    margin: auto;
-    display: block;
-    height: 80%;
+    height: 100%;
     object-fit: contain;
     width: 100%;
 }
 
 #slide video {
-    margin-top: 50px;
+    height: 100%;
+    object-fit: contain;
     width: 100%;
 }
 
 #slide p {
     color: #901C1C;
     font-size: 1.2em;
+    margin: auto;
+    position: fixed;
+    left: 0;
+    right: 0;
 }
 
 #close-slide {
@@ -238,7 +246,7 @@
 #prev-slide {
     color: #901C1C;
     position: absolute;
-    top: 40%;
+    top: 50%;
     font-size: 42px;
     left: -3%;
 }
@@ -246,9 +254,9 @@
 #next-slide {
     color: #901C1C;
     position: absolute;
-    top: 40%;
+    top: 50%;
     font-size: 42px;
-    left: 100%;
+    right: -3%;
 }
 
 /**************** Contact Modal ****************/
