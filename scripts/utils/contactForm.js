@@ -24,12 +24,16 @@ function validate(event){
 
 function displayModal() {
     const modal = document.getElementById("contact_modal");
+    const main = document.querySelector("main");
 	modal.style.display = "block";
+    main.style.display = "none";
 }
 
 function closeModal() {
     const modal = document.getElementById("contact_modal");
+    const main = document.querySelector("main");
     modal.style.display = "none";
+    main.style.display = "block";
 }
 
 function isValid(input) {
@@ -81,3 +85,8 @@ function messageValidation(){
         return true;
     }
 }
+
+firstNameInput.addEventListener("input", firstNameValidation);
+lastNameInput.addEventListener("input", lastNameValidation);
+emailInput.addEventListener("input", emailValidation);
+messageInput.addEventListener("input", messageValidation);

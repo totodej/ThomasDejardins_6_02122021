@@ -28,19 +28,20 @@ async function getPictures(photographer, medias) {
     mediasPhotograph.textContent = "";
     newMedias.forEach(function (media) {
       addTitleForVideo(media);
-      displayPicture(media);
+      displayCard(media);
     });
 
     sortMedias(newMedias);
     clickHeart(photographer, newMedias);
     lightBox(newMedias);
-    
+
     return newMedias;
   }
 
   function clickHeart(photographer, medias) {
-    const newMedias = [...medias];  
-    const hearts = document.getElementsByClassName("heart-click");
+    const newMedias = [...medias];
+    const buttonsHeart = document.getElementsByClassName("heart-click");
+    const hearts = document.getElementsByClassName("heart");
     const likes = document.querySelectorAll(".likes p");
     let totalLikesDOM = document.querySelector(".total-likes p");
     let totalLikes = Number(totalLikesDOM.textContent);
@@ -51,25 +52,25 @@ async function getPictures(photographer, medias) {
       localStorage.setItem(photographer.name, JSON.stringify(photographer));
     }
 
-
     let storage = JSON.parse(localStorage.getItem(photographer.name));
 
     photographer.totalLikes = storage.totalLikes;
     totalLikesDOM.textContent = storage.totalLikes;
 
     for (let i = 0; i < hearts.length; i++) {
+      const buttonHeart = buttonsHeart[i];
       const heart = hearts[i];
-      
+
       if (storage.medias[i].isLiked === undefined) {
         storage.medias[i].isLiked = false;
       } else if (storage.medias[i].isLiked === true) {
         heart.classList.replace("far", "fas");
-        //likes[i].textContent = storage.medias[i].likes;
+        likes[i].textContent = storage.medias[i].likes;
       }
-      
-      //newMedias[i].likes = storage.medias[i].likes;
 
-      heart.addEventListener("click", function () {
+      newMedias[i].likes = storage.medias[i].likes;
+
+      buttonHeart.addEventListener("click", function () {
         if (heart.matches(".far")) {
           newMedias[i].isLiked = true;
           newMedias[i].likes = ++newMedias[i].likes;
@@ -81,11 +82,10 @@ async function getPictures(photographer, medias) {
           newMedias[i].likes = --newMedias[i].likes;
           heart.classList.replace("fas", "far");
           likes[i].textContent = newMedias[i].likes;
-          totalLikesDOM.textContent = --photographer.totalLikes;  
+          totalLikesDOM.textContent = --photographer.totalLikes;
         }
         localStorage.setItem(photographer.name, JSON.stringify(photographer));
       });
-      
     }
     return newMedias;
   }
@@ -94,13 +94,17 @@ async function getPictures(photographer, medias) {
     const newMedias = [...medias];
     const mediaModal = document.getElementById("media-modal");
     const elementsMedia = document.getElementsByClassName("media");
+    const header = document.querySelector("header");
+    const main = document.querySelector("main");
 
-    for(let i = 0; i < elementsMedia.length; i++){
-        let elementMedia = elementsMedia[i];
-        let element = elementMedia.firstChild;
-        element.addEventListener("click", function(){
-            clickMedia(newMedias, i);
-        })
+    for (let i = 0; i < elementsMedia.length; i++) {
+      let elementMedia = elementsMedia[i];
+      let element = elementMedia.firstChild;
+      element.addEventListener("click", function () {
+        header.style.display = "none";
+        main.style.display = "none";
+        clickMedia(newMedias, i);
+      });
     }
 
     function clickMedia(newMedias, i) {
@@ -121,6 +125,8 @@ async function getPictures(photographer, medias) {
 
         if (currentIndex === newMedias.length) {
           mediaModal.style.display = "none";
+          header.style.display = "block";
+          main.style.display = "block";
           mediaModal.innerHTML = "";
         } else {
           if (medias[currentIndex].image === undefined) {
@@ -159,6 +165,8 @@ async function getPictures(photographer, medias) {
 
         if (currentIndex === -1) {
           mediaModal.style.display = "none";
+          header.style.display = "block";
+          main.style.display = "block";
           mediaModal.innerHTML = "";
         } else {
           if (newMedias[currentIndex].image === undefined) {
@@ -196,6 +204,8 @@ async function getPictures(photographer, medias) {
       const closeSlide = document.getElementById("close-slide");
       closeSlide.addEventListener("click", function () {
         mediaModal.style.display = "none";
+        header.style.display = "block";
+        main.style.display = "block";
         mediaModal.innerHTML = "";
       });
     }
@@ -215,8 +225,11 @@ async function getPictures(photographer, medias) {
     function getLightBoxDOM(image, video, id, title) {
       const divLightbox = document.createElement("div");
       const divSlide = document.createElement("div");
+      const buttonClose = document.createElement("button");
       const iClose = document.createElement("i");
+      const buttonLeft = document.createElement("button");
       const iLeft = document.createElement("i");
+      const buttonRight = document.createElement("button");
       const iRight = document.createElement("i");
       const p = document.createElement("p");
 
@@ -226,9 +239,12 @@ async function getPictures(photographer, medias) {
 
       divLightbox.setAttribute("id", "lightboxe");
       divSlide.setAttribute("id", "slide");
-      iLeft.setAttribute("id", "prev-slide");
-      iRight.setAttribute("id", "next-slide");
-      iClose.setAttribute("id", "close-slide");
+      buttonLeft.setAttribute("id", "prev-slide");
+      buttonLeft.setAttribute("aria-label", "précédente image");
+      buttonRight.setAttribute("id", "next-slide");
+      buttonRight.setAttribute("aria-label", "prochaine image");
+      buttonClose.setAttribute("id", "close-slide");
+      buttonClose.setAttribute("aria-label", "fermeture de la modal");
 
       if (image === undefined) {
         const videoPic = document.createElement("video");
@@ -236,6 +252,7 @@ async function getPictures(photographer, medias) {
         const pathVideo = `/assets/photographers/${id}/${video}`;
 
         source.setAttribute("src", pathVideo);
+        videoPic.setAttribute("aria-label", title);
         videoPic.controls = "controls";
 
         divSlide.appendChild(videoPic);
@@ -245,15 +262,19 @@ async function getPictures(photographer, medias) {
         const pathImage = `/assets/photographers/${id}/${image}`;
 
         img.setAttribute("src", pathImage);
+        img.setAttribute("alt", title);
         divSlide.appendChild(img);
       }
 
       p.textContent = title;
 
       divLightbox.appendChild(divSlide);
-      divLightbox.appendChild(iClose);
-      divLightbox.appendChild(iLeft);
-      divLightbox.appendChild(iRight);
+      divLightbox.appendChild(buttonClose);
+      divLightbox.appendChild(buttonLeft);
+      divLightbox.appendChild(buttonRight);
+      buttonClose.appendChild(iClose);
+      buttonLeft.appendChild(iLeft);
+      buttonRight.appendChild(iRight);
       divSlide.appendChild(p);
 
       return divLightbox;
@@ -261,24 +282,37 @@ async function getPictures(photographer, medias) {
   }
 
   function sortMedias(medias) {
-    const newMedias = [...medias]; 
-    console.log(newMedias) 
-    const sort = document.getElementById("sort");
-    sort.addEventListener("change", function () {
-      switch (sort.value) {
-        case "popularity":
-          refreshView(sortByLike(newMedias));
-          break;
-        case "date":
-          refreshView(sortByDate(newMedias));
-          break;
-        case "title":
-          refreshView(sortByTitle(newMedias));
-          break;
+    const newMedias = [...medias];
+    const blocSort = document.getElementById("bloc-sort");
+    const buttonSort = document.getElementById("button-sort");
+    const popularity = document.getElementById("popularity");
+    const date = document.getElementById("date");
+    const title = document.getElementById("title");
 
-        default:
-          break;
+    buttonSort.addEventListener("click", function () {
+      if ((blocSort.style.display = "none")) {
+        blocSort.style.display = "block";
+      } else if ((blocSort.style.display = "block")) {
+        blocSort.style.display = "none";
       }
+    });
+
+    popularity.addEventListener("click", function () {
+      buttonSort.textContent = popularity.textContent;
+      blocSort.style.display = "none";
+      refreshView(sortByLike(newMedias));
+    });
+
+    date.addEventListener("click", function () {
+      buttonSort.textContent = date.textContent;
+      blocSort.style.display = "none";
+      refreshView(sortByDate(newMedias));
+    });
+
+    title.addEventListener("click", function () {
+      buttonSort.textContent = title.textContent;
+      blocSort.style.display = "none";
+      refreshView(sortByTitle(newMedias));
     });
 
     function sortByLike(medias) {
@@ -290,7 +324,9 @@ async function getPictures(photographer, medias) {
 
     function sortByDate(medias) {
       const newMedias = [...medias];
-      newMedias.sort((itemMax, itemMin) => new Date(itemMin.date) - new Date(itemMax.date));
+      newMedias.sort(
+        (itemMax, itemMin) => new Date(itemMin.date) - new Date(itemMax.date)
+      );
       console.log(newMedias);
       return newMedias;
     }
@@ -326,7 +362,7 @@ async function getPictures(photographer, medias) {
   }
 
   // display medias
-  async function displayPicture(media) {
+  async function displayCard(media) {
     const mediasPhotograph = document.getElementById("medias-photograph");
     //const mediaModal = document.getElementById("media-modal");
     const userGaleryDOM = getUserGalleryDOM(
@@ -340,78 +376,75 @@ async function getPictures(photographer, medias) {
     mediasPhotograph.appendChild(userGaleryDOM);
 
     function getUserGalleryDOM(title, id, likes, image, video) {
-      const divMedia = document.createElement("div");
+      const articleMedia = document.createElement("article");
+      const aMedia = document.createElement("a");
       const divInformationsMedia = document.createElement("div");
       const pTitle = document.createElement("p");
       const divLikes = document.createElement("div");
       const pLikes = document.createElement("p");
+      const buttonHeart = document.createElement("button");
       const heart = document.createElement("i");
+      const altMedia = title + ", closeup view";
 
       pTitle.textContent = title;
       pLikes.textContent = likes;
 
-      divMedia.className = "media";
+      articleMedia.className = "media";
       divInformationsMedia.className = "informations-media";
       pTitle.className = "titleMedia";
       divLikes.className = "likes";
-      heart.className = "far fa-heart heart-click";
+      heart.className = "far fa-heart heart";
+      buttonHeart.className = "heart-click";
+
       if (image === undefined) {
         const videoPic = document.createElement("video");
         const source = document.createElement("source");
         const pathVideo = `/assets/photographers/${id}/${video}`;
 
+        aMedia.setAttribute("href", "#");
+        videoPic.setAttribute("aria-label", altMedia);
         source.setAttribute("src", pathVideo);
         source.setAttribute("type", "video/mp4");
-        divMedia.appendChild(videoPic);
+
+        aMedia.appendChild(videoPic);
         videoPic.appendChild(source);
       } else {
         const img = document.createElement("img");
         const pathImage = `/assets/photographers/${id}/${image}`;
 
+        aMedia.setAttribute("href", "#");
         img.setAttribute("src", pathImage);
-        divMedia.appendChild(img);
+        img.setAttribute("alt", altMedia);
+
+        aMedia.appendChild(img);
       }
 
-      divMedia.appendChild(divInformationsMedia);
+      buttonHeart.setAttribute("aria-label", "likes");
+
+      articleMedia.appendChild(aMedia);
+      articleMedia.appendChild(divInformationsMedia);
       divInformationsMedia.appendChild(pTitle);
       divInformationsMedia.appendChild(divLikes);
       divLikes.appendChild(pLikes);
-      divLikes.appendChild(heart);
+      divLikes.appendChild(buttonHeart);
+      buttonHeart.appendChild(heart);
 
-      return divMedia;
+      return articleMedia;
     }
   }
 }
 
 // display total hearts and the price per day
 function displayMoreInfos(price, medias) {
-  const photographHeader = document.getElementById("photograph-header");
-  const divInfo = document.createElement("div");
-  const divHeart = document.createElement("div");
-  const pHeart = document.createElement("p");
-  const heart = document.createElement("i");
-  const pPrice = document.createElement("p");
-
+  const pHeart = document.querySelector(".total-likes p");
+  const pPrice = document.querySelector(".price-photographer");
   let likes = 0;
-
-  divInfo.className = "more-informations";
-  divHeart.className = "total-likes";
-  pPrice.className = "price-photographer";
-  heart.className = "fas fa-heart";
-
   medias.forEach(function (media) {
     likes += media.likes;
   });
 
-  pPrice.textContent = price + "€ / jour";
-
-  photographHeader.appendChild(divInfo);
-  divInfo.appendChild(divHeart);
-  divInfo.appendChild(pPrice);
-  divHeart.appendChild(pHeart);
-  divHeart.appendChild(heart);
-
   pHeart.textContent = likes;
+  pPrice.textContent = price + "€ / jour";
 }
 
 function getPhotographersInfoById(photographerData, id) {
