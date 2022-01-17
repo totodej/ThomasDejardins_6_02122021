@@ -1,6 +1,20 @@
 function photographerFactory(data) {
-  const { name, portrait, city, country, tagline, price, tag, id } = data;
-  const picture = `assets/photographers/Photographers_ID_Photos/${portrait}`;
+  const {
+    name,
+    portrait,
+    city,
+    country,
+    tagline,
+    price,
+    tag,
+    id,
+    title,
+    image,
+    likes,
+    date,
+    medias,
+  } = data;
+  const profilPicture = `assets/photographers/Photographers_ID_Photos/${portrait}`;
   const adress = `photographer.html?id=${id}`;
 
   function getUserCardDOM() {
@@ -13,15 +27,13 @@ function photographerFactory(data) {
     const pCity = document.createElement("p");
     const pTagline = document.createElement("p");
     const pPrice = document.createElement("p");
-    const divTags = document.createElement("div");
-    const ul = document.createElement("ul");
+    const altProfilPicture = name + " profil picture"
 
     divPresentation.className = "presentation";
     divInformation.className = "informations";
     pCity.className = "location";
     pTagline.className = "tagline";
     pPrice.className = "price";
-    divTags.className = "photographer-tags";
 
     h2.textContent = name;
     pCity.textContent = city + ", " + country;
@@ -29,16 +41,9 @@ function photographerFactory(data) {
     pPrice.textContent = price + "€/jour";
 
     divPresentation.setAttribute("href", adress);
-    img.setAttribute("src", picture);
-
-    function renderTagsList(element, index, array) {
-      const li = document.createElement("li");
-        
-      ul.appendChild(li);
-      li.innerHTML += array[index];
-    }
-
-    tag.forEach(renderTagsList);
+    divPresentation.setAttribute("aria-label", name)
+    img.setAttribute("src", profilPicture);
+    img.setAttribute("alt", altProfilPicture);
 
     article.appendChild(divPresentation);
     divPresentation.appendChild(img);
@@ -47,11 +52,59 @@ function photographerFactory(data) {
     divInformation.appendChild(pCity);
     divInformation.appendChild(pTagline);
     divInformation.appendChild(pPrice);
-    article.appendChild(divTags);
-    divTags.appendChild(ul);
 
     return article;
   }
 
-   return { name, picture, city, country, tagline, price, tag, id, getUserCardDOM };
+  function getUserProfilDOM() {
+    const article = document.createElement("article");
+    const divProfilInformations = document.createElement("div");
+    const h1 = document.createElement("h1");
+    const pCity = document.createElement("p");
+    const pTagline = document.createElement("p");
+    const button = document.createElement("button");
+    const img = document.createElement("img");
+
+    divProfilInformations.className = "profil-informations";
+    pCity.className = "location-profil";
+    pTagline.className = "tagline-profil";
+    button.className = "contact_button";
+
+    h1.textContent = name;
+    pCity.textContent = city + ", " + country;
+    pTagline.textContent = tagline;
+    button.textContent = "Contactez-moi";
+
+    button.setAttribute("id", "contact-me");
+    button.setAttribute("aria-label", "contactez-moi");
+    img.setAttribute("src", profilPicture);
+    img.setAttribute("alt", name);
+
+    article.appendChild(divProfilInformations);
+    divProfilInformations.appendChild(h1);
+    divProfilInformations.appendChild(pCity);
+    divProfilInformations.appendChild(pTagline);
+    article.appendChild(button);
+    article.appendChild(img);
+
+    return article;
+  }
+
+  return {
+    name,
+    profilPicture,
+    city,
+    country,
+    tagline,
+    price,
+    tag,
+    id,
+    title,
+    image,
+    likes,
+    date,
+    medias,
+    getUserCardDOM,
+    getUserProfilDOM
+  };
 }

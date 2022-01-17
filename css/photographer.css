@@ -41,6 +41,11 @@
     margin: auto;
 }
 
+#contact-me:hover {
+    background-color: #DB8876;
+    color: black;
+}
+
 .more-informations {
     position: fixed;
     display: flex;
@@ -106,7 +111,7 @@
 }
 
 /**************** Sort Medias ****************/
-
+/*
 #sort-medias {
     margin-top: 20px;
     margin-left: 100px;
@@ -132,6 +137,110 @@
     border-radius: 5px;
     font-size: 1.125em;
 }
+*/
+
+#sort-medias {
+    position: relative;
+    display: flex; 
+    margin-top: 20px;
+    margin-left: 100px;
+}
+  
+#sort-medias p {
+    padding: 15px 10px;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+}
+
+#sort-by {
+    font-weight: bold;
+}
+
+#button-sort {
+    background-color: #901C1C;
+    color : white;
+    font-family: "Dm Sans",sans-serif;
+    border: none;
+    border-radius: 3px;
+    width: 140px;
+    text-align: left;
+    padding: 10px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#button-sort::after {
+    content: "";
+    border: solid #fff;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 4px;
+    transform: rotate(45deg) translate3d(-25%, -25%, 0);
+    position: absolute;
+    top: 21px;
+    left: 206px;
+}
+
+.fa-chevron-down {
+    margin-right: 10px;
+}
+
+.fa-chevron-up {
+    margin-left: 16px;
+}
+
+#bloc-sort {
+    border: none;
+    padding: 0px;
+    border-radius: 3px;
+    position: absolute;
+    top: -16px;
+    left: 89px;
+    background-color: #901C1C;
+    color: white;
+    width: 120px;
+    display: none;
+    padding: 5px 10px;
+    z-index: 1;
+}
+
+#bloc-sort li {
+    list-style-type: none; 
+    padding: 10px 0px;
+    cursor: pointer;
+}
+
+#bloc-sort li button {
+    font-family: "Dm Sans",sans-serif;
+    font-size: 1em;
+    border: none;
+    background-color: transparent;
+    color: white;
+    padding: 0px;
+}
+
+#popularity {
+    display: flex;
+    justify-content: space-between;
+}
+
+#popularity::after {
+    content: "";
+    border: solid #fff;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 4px;
+    transform: rotate(225deg) translate3d(-25%, -25%, 0);
+    position: absolute;
+    top: 18px;
+    left: 117px;
+}
+
+#date {
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+}
+  
 
 /**************** Gallery Medias ****************/
 
@@ -173,7 +282,14 @@
 
 .likes p {
     padding-right: initial;
-    margin-right: 5px;
+}
+
+.likes button {
+    height: 30px;
+    font-size: 1.2em;
+    margin: auto;
+    background-color: transparent;
+    border: none;
 }
 
 .fa-heart {
@@ -241,6 +357,8 @@
     top: 0%;
     font-size: 42px;
     left: 100%;
+    background-color: transparent;
+    border: 0px;
 }
 
 #prev-slide {
@@ -249,6 +367,8 @@
     top: 50%;
     font-size: 42px;
     left: -3%;
+    background-color: transparent;
+    border: 0px;
 }
 
 #next-slide {
@@ -257,6 +377,8 @@
     top: 50%;
     font-size: 42px;
     right: -3%;
+    background-color: transparent;
+    border: 0px;
 }
 
 /**************** Contact Modal ****************/
@@ -282,6 +404,8 @@
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    margin-top: 62px;
+    margin-bottom: 62px;
 }
 
 .modal header {
@@ -290,11 +414,15 @@
     width: 100%;
 }
 
-.modal header img {
+.close-contact-modal {
     cursor: pointer;
     position: absolute;
     top: -30px;
     right: 0;
+    font-size: 50px;
+    border: none;
+    background-color: transparent;
+    color: white;
 }
 
 .modal header h2 {
@@ -361,7 +489,7 @@ form textarea {
 .formData[data-error]::after {
     content: attr(data-error);
     font-size: 1em;
-    color: red;
+    color: #901C1C;
     display: block;
     margin-top: 7px;
     margin-bottom: 7px;

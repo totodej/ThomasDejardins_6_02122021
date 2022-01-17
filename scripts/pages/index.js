@@ -1,13 +1,12 @@
+let photographerData;
 async function getPhotographers() {
   // les données récupérées dans le fichier json
-  const xmlhttp = new XMLHttpRequest();
-  xmlhttp.onload = function () {
-    const data = JSON.parse(this.responseText);
-    displayData(data.photographers);
-    filter(data.photographers);
-  };
-  xmlhttp.open("GET", "/data/photographers.json");
-  xmlhttp.send();
+  return fetch("/data/photographers.json").then((response) => {
+    if (!response.ok) {
+      console.log("erreur");
+    }
+    return response.json();
+  });
 }
 
 // Filtre les photographes au clics
@@ -24,9 +23,9 @@ async function filter(photographers) {
   const selectedTags = [];
 
   function addOnClick(photographers, element) {
-    const selectedPhotographers = [];    
+    const selectedPhotographers = [];
     selectedTags.push(element.textContent.toLowerCase());
-    console.log("selectedTags", selectedTags);
+    //console.log("selectedTags", selectedTags);
     photographers.forEach(function (photographer) {
       const photographerTag = photographer.tag;
       if (photographerTag.includes(element.textContent.toLowerCase())) {
@@ -35,39 +34,39 @@ async function filter(photographers) {
         }
       }
     });
-    console.log("selectedPhoto", selectedPhotographers)
-    selectedPhotographers.forEach(function(photographer){
-        filterPhotographers.push(photographer);
+    //console.log("selectedPhoto", selectedPhotographers);
+    selectedPhotographers.forEach(function (photographer) {
+      filterPhotographers.push(photographer);
     });
-    console.log("filterPho", filterPhotographers);
+    //console.log("filterPho", filterPhotographers);
     displayData(filterPhotographers);
   }
 
   function removeOnClick(photographers, element) {
-    filterPhotographers = [];    
+    filterPhotographers = [];
     const selecterIndex = selectedTags.indexOf(
       element.textContent.toLowerCase()
     );
     if (selecterIndex !== -1) {
       selectedTags.splice(selecterIndex, 1);
     }
-    console.log("selectedTags", selectedTags);
+    //console.log("selectedTags", selectedTags);
 
     photographers.forEach(function (photographer) {
       const test = selectedTags.filter((tag) => photographer.tag.includes(tag));
-      console.log("photographer.tag", photographer.tag);
-      console.log('test', test)
+      //console.log("photographer.tag", photographer.tag);
+      //console.log("test", test);
       if (test.length !== 0 && !filterPhotographers.includes(photographer)) {
         filterPhotographers.push(photographer);
       }
     });
-    console.log("selectedTag", selectedTags);
-    console.log("filterPhoto", filterPhotographers);
-    if(filterPhotographers.length === 0){
-        displayData(photographers);
-    }else {
-        displayData(filterPhotographers);
-    }  
+    //console.log("selectedTag", selectedTags);
+    //console.log("filterPhoto", filterPhotographers);
+    if (filterPhotographers.length === 0) {
+      displayData(photographers);
+    } else {
+      displayData(filterPhotographers);
+    }
   }
 
   function isActive(element) {
@@ -163,13 +162,15 @@ async function displayData(photographers) {
     const userCardDOM = photographerModel.getUserCardDOM();
 
     photographersSection.appendChild(userCardDOM);
-    
   });
 }
 
 async function init() {
   // Récupère les datas des photographes
-  const photographers = await getPhotographers();
+  photographerData = await getPhotographers();
+  displayData(photographerData.photographers);
+  filter(photographerData.photographers);
+  
 }
 
 init();

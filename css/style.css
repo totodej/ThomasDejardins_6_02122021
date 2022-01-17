@@ -5,7 +5,6 @@ body {
     margin: 0;
 }
 
-
 header {
     display: flex;
     flex-direction: row;
@@ -30,17 +29,22 @@ header {
 nav ul li, .photographer-tags ul li {
     list-style-type: none;
     margin: 2px 2px;
-    padding: 1px 5px;
-    border: 1px solid #D3D3D3;
-    border-radius: 14px;
-    color: #901C1C;
     font-size: 0.8em;
 }
 
-.filters ul li:hover, .photographer-tags ul li:hover {
+.filters ul li a{
+    color: #901C1C;
+    text-decoration: none;
+    padding: 1px 5px;
+    border: 1px solid #D3D3D3;
+    border-radius: 14px;
+}
+
+.filters ul li a:hover {
     background-color: #901C1C;
     color : white;
     cursor: pointer;
+    border-color: #901C1C;
 }
 
 .active {
@@ -124,6 +128,7 @@ h1 {
         top: 130px;
         left: 0;
         right: 0;
+        row-gap: 5px;
     }
 }
 
