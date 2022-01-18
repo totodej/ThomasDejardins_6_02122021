@@ -2,10 +2,474 @@
     display: none;
 }
 
-.photograph-header {
+/**************** Photographer Profil ****************/
+
+#photograph-header {
     background-color: #FAFAFA;
-    height: 300px;
+    height: 313px;
     margin: 0 100px;
+}
+
+#photograph-header article {
+    display: grid;
+    grid-template-columns: 1fr 170px 1fr;
+    height: 313px;
+}
+
+#photograph-header article img {
+    height: 200px;
+    width: 200px;
+    margin: auto;
+    border-radius: 100px;
+    object-fit: cover;
+    object-position: center;
+    box-shadow: 0px 2px 16px -6px #525252;
+    margin-right: 50px;
+}
+
+#contact-me {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    width: 170px;
+    height: 70px;
+    border: none;
+    background-color: #901C1C;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: auto;
+}
+
+#contact-me:hover {
+    background-color: #DB8876;
+    color: black;
+}
+
+.more-informations {
+    position: fixed;
+    display: flex;
+    background-color: #DB8876;
+    bottom: 0;
+    right: 36px;
+    width: 376px;
+    justify-content: space-between;
+    font-size: 1.5em;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.more-informations p {
+    margin-block-end: 0.5em;
+}
+
+.total-likes {
+    display: flex;
+    margin-left: 31px;
+}
+
+.total-likes .fa-heart {
+    color: black;
+    margin-top: 29px;
+    font-size: 0.9em;
+    margin-left: 5px;
+}
+
+.price-photographer {
+    margin-right: 34px;
+}
+
+.profil-informations {
+    margin-left: 50px;
+}
+
+.profil-informations h1 {
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-top: 65px;
+    color : #D3573C;
+    font-size: 3.5em;
+    font-weight: 500;
+    margin-right: 0px;
+}
+
+.location-profil {
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    color: #901C1C;
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-top: 16px;
+}
+
+.tagline-profil {
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    color: #525252;
+    font-weight: 500;
+    font-size: 1.12em;
+    margin-top: 19px;
+}
+
+/**************** Sort Medias ****************/
+/*
+#sort-medias {
+    margin-top: 20px;
+    margin-left: 100px;
+}
+
+#sort-medias label {
+    font-weight: bold;
+    font-size: 1.125em;
+}
+
+#sort-medias select {
+    background-color: #901C1C;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.125em;
+}
+
+#sort {
+    background-color: #901C1C;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.125em;
+}
+*/
+
+#sort-medias {
+    position: relative;
+    display: flex; 
+    margin-top: 20px;
+    margin-left: 100px;
+}
+  
+#sort-medias p {
+    padding: 15px 10px;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+}
+
+#sort-by {
+    font-weight: bold;
+}
+
+#button-sort {
+    background-color: #901C1C;
+    color : white;
+    font-family: "Dm Sans",sans-serif;
+    border: none;
+    border-radius: 3px;
+    width: 140px;
+    text-align: left;
+    padding: 10px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#button-sort::after {
+    content: "";
+    border: solid #fff;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 4px;
+    transform: rotate(45deg) translate3d(-25%, -25%, 0);
+    position: absolute;
+    top: 21px;
+    left: 206px;
+}
+
+.fa-chevron-down {
+    margin-right: 10px;
+}
+
+.fa-chevron-up {
+    margin-left: 16px;
+}
+
+#bloc-sort {
+    border: none;
+    padding: 0px;
+    border-radius: 3px;
+    position: absolute;
+    top: -16px;
+    left: 89px;
+    background-color: #901C1C;
+    color: white;
+    width: 120px;
+    display: none;
+    padding: 5px 10px;
+    z-index: 1;
+}
+
+#bloc-sort li {
+    list-style-type: none; 
+    padding: 10px 0px;
+    cursor: pointer;
+}
+
+#bloc-sort li button {
+    font-family: "Dm Sans",sans-serif;
+    font-size: 1em;
+    border: none;
+    background-color: transparent;
+    color: white;
+    padding: 0px;
+}
+
+#popularity {
+    display: flex;
+    justify-content: space-between;
+}
+
+#popularity::after {
+    content: "";
+    border: solid #fff;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 4px;
+    transform: rotate(225deg) translate3d(-25%, -25%, 0);
+    position: absolute;
+    top: 18px;
+    left: 117px;
+}
+
+#date {
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+}
+  
+
+/**************** Gallery Medias ****************/
+
+#medias-photograph {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 30px;
+    margin: 0px 55px;
+    margin-top: 54px;
+}
+
+.media {
+    width: 350px;
+    margin: auto;
+}
+
+.media img, .media video {
+    width: 350px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.informations-media {
+    display: flex;
+    justify-content: space-between;
+}
+
+.informations-media p{
+    color: #901C1C;
+    font-size: 1.5em;
+    padding-right: 30px;;
+}
+
+.likes {
+    display: flex;   
+    padding: 0px 0px 31px;
+}
+
+.likes p {
+    padding-right: initial;
+}
+
+.likes button {
+    height: 30px;
+    font-size: 1.2em;
+    margin: auto;
+    background-color: transparent;
+    border: none;
+}
+
+.fa-heart {
+    margin: auto;
+    color: #901C1C;
+}
+
+/**************** LightBox ****************/
+
+#media-modal {
+    background-color: #fff;
+    height: 200vw;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+    display: none;
+}
+
+#lightboxe {
+    background-color: #fff;
+    height: 90%;
+    left: 50%;
+    margin: 0 auto;
+    position: fixed;
+    text-align: center;
+    top: 3%;
+    transform: translate(-50%, 0);
+    width: 60%;
+}
+
+#slide {
+    background-color: #fff;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    width: 90%;
+}
+
+#slide img {
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+}
+
+#slide video {
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+}
+
+#slide p {
+    color: #901C1C;
+    font-size: 1.2em;
+    margin: auto;
+    position: fixed;
+    left: 0;
+    right: 0;
+}
+
+#close-slide {
+    color: #901C1C;
+    position: absolute;
+    top: 0%;
+    font-size: 42px;
+    left: 100%;
+    background-color: transparent;
+    border: 0px;
+}
+
+#prev-slide {
+    color: #901C1C;
+    position: absolute;
+    top: 50%;
+    font-size: 42px;
+    left: -3%;
+    background-color: transparent;
+    border: 0px;
+}
+
+#next-slide {
+    color: #901C1C;
+    position: absolute;
+    top: 50%;
+    font-size: 42px;
+    right: -3%;
+    background-color: transparent;
+    border: 0px;
+}
+
+/**************** Contact Modal ****************/
+
+#contact_modal {
+    background-color: #fff;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: auto;
+}
+
+.modal {
+    border-radius: 5px;
+    background-color: #DB8876;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35px;
+    margin: auto;
+    margin-top: 62px;
+    margin-bottom: 62px;
+}
+
+.modal header {
+    position: relative;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.close-contact-modal {
+    cursor: pointer;
+    position: absolute;
+    top: -30px;
+    right: 0;
+    font-size: 50px;
+    border: none;
+    background-color: transparent;
+    color: white;
+}
+
+.modal header h2 {
+    font-size: 64px;
+    font-weight: normal;
+    text-align: left;
+}
+
+#profil-name {
+    display: block;
+}
+
+form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 50px;
+}
+
+form label {
+    color: #312E2E;
+    font-size: 36px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: self-start;
+}
+
+form input {
+    width: 100%;
+    height: 68px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5em;
+}
+
+form textarea {
+    font-family: "DM Sans", sans-serif;
+    width: 100%;
+    height: 120px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5em;
 }
 
 .contact_button {
@@ -19,58 +483,204 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 26px;
 }
 
-.modal {
-    border-radius: 5px;
-    background-color: #DB8876;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 35px;
-    margin: auto;
+.formData[data-error]::after {
+    content: attr(data-error);
+    font-size: 1em;
+    color: #901C1C;
+    display: block;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    text-align: left;
+    line-height: 1;
+    opacity: 0;
+    transition: 0.3s;
 }
 
-.modal header {
-    justify-content: space-between;
-    width: 100%;
+.formData[data-error-visible="true"]::after {
+    opacity: 1;
 }
 
-.modal header img {
-    cursor: pointer;
+@media screen and (max-width: 1410px){
+    .profilInformations h1 {
+        font-size: 2.5em;
+    }
 }
 
-.modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
+@media screen and (max-width: 1410px){
+    #medias-photograph {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
+@media screen and (max-width: 1155px){
+    #photograph-header article {
+        position: relative;
+        grid-template-columns: 1fr 250px;
+    }
+    
+    #contact-me {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 10px;
+        z-index: 1;
+        height: 45px;
+    }
+
+    .more-informations {
+        display: none;
+    }
+
+    .modal header h2 {
+        font-size: 50px;;
+    }
 }
 
-form label {
-    color: #312E2E;
-    font-size: 36px;
+@media screen and (max-width: 960px) {
+    .modal {
+        width: 70%;
+    }
 }
 
-form div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
+@media screen and (max-width: 900px) {
+    #photograph-header {
+        margin: 0px;
+        background-color: white;
+    }
+
+    #photograph-header article {
+        position: relative;
+        grid-template-columns: 1fr 200px;
+        height: initial;
+    }
+
+    #photograph-header article img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .profilInformations h1 {
+        font-size: 1.5em;
+        margin-top: 20px;
+    }
+
+    .taglineProfil {
+        font-size: 1em;
+    }
+
+    .locationProfil {
+        font-size: 1.1em;
+    }
+
+    #sort-medias {
+        margin-left: 50px;
+    }
 }
 
-form input {
-    width: 100%;
-    height: 68px;
-    border: none;
-    border-radius: 5px;
+@media screen and (max-width: 850px){
+    #medias-photograph {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 690px) {
+    .modal {
+        width: 90%;
+        margin: initial;
+        border-radius: initial;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #photograph-header article {
+        grid-template-columns: 1fr 150px;
+    }
+
+    #photograph-header article img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profilInformations h1 {
+        margin-top: 0px;
+    }
+    .taglineProfil {
+        margin-top: 5px;
+    }
+    .locationProfil {
+        margin-top: 5px;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .modal {
+        width: 88%;
+    }
+    
+    .modal header h2 {
+        font-size: 35px;
+    }
+
+    form {
+        margin-top: 20px;
+    }
+    
+    .formData[data-error]::after {
+        font-size: 0.8em;
+        margin-bottom: 0px;
+    }
+
+    form label {
+        font-size: 25px;
+    }
+
+    form input {
+        height: 50px;
+        font-size: 1.2em;
+    }
+
+    form textarea {
+        font-size: 1.2em;
+    }
+
+    .contact_button {
+        height: 55px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    #photograph-header article {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    #photograph-header article img {
+        margin: auto;
+    }
+
+    .profilInformations {
+        text-align: center;
+        margin-left: 0px;
+    }
+
+    .profilInformations h1 {
+        margin-top: 5px;
+    }
+
+    .modal {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .modal header h2 {
+        font-size: 25px;
+    }
+
+    form label {
+        font-size: 20px;
+    }
 }

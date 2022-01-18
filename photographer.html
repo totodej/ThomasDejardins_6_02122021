@@ -3,34 +3,66 @@
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="assets/favicon.png">
+    <script src="https://kit.fontawesome.com/45e38e596f.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <title>Fisheye - photographe </title>
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="index.html"><img src="assets/images/logo.png" class="logo" alt="Fisheye home page" /></a>
     </header>
-    <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+    <main id="main" aria-hidden="false">
+      <div id="photograph-header" aria-label="présentation du photographe"></div>
+      <div id="sort-medias" aria-label="trie gallerie">
+        <p id="sort-by">Trier par :</p>
+        <button id="button-sort" aria-haspopup="true" aria-expanded="true">Popularité</button>
+        <ul id="bloc-sort" role="listbox" aria-labelledby="liste de trie" aria-selected="true">
+          <li id="popularity"><button>Popularité</button></li>
+          <li id="date"><button>Date</button></li>
+          <li id="title"><button>Titre</button></li>
+        </ul>
       </div>
+      <div id="medias-photograph" aria-label="gallerie photos"></div>
     </main>
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+    <div class="more-informations" aria-label="plus d'informations">
+      <div class="total-likes">
+        <p></p>
+        <i class="fas fa-heart"></i>
+      </div>
+      <p class="price-photographer"></p>
+    </div>
+    <div id="media-modal" aria-label="vue rapprocher de l'image" aria-hidden="true" role="dialog" aria-describedby="media modal"></div>
+    <div id="contact_modal" aria-label="formulaire de contact" aria-hidden="true" role="dialog" aria-describedby="contact modal">
+      <div class="modal">
+        <header>
+          <h2>Contactez-moi <span id="profil-name"></span></h2>
+          <button class="close-contact-modal" onclick="closeModal()" aria-label="fermeture du formulaire de contact"><i class="fas fa-times"></i></button>
         </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
+        <form action="index.html" method="get" onsubmit="return validate(event);">
+          <div class="formData" data-error="Veuillez entrer 2 caractères ou plus pour le champ du prénom." data-error-visible="false">
+            <label for="first">Prénom</label>
+            <input type="text" name="first" id="first" aria-labelledby="prénom"/>
+          </div>
+          <div class="formData" data-error="Veuillez entrer 2 caractères ou plus pour le champ du nom." data-error-visible="false">
+            <label for="last">Nom</label>
+            <input type="text" name="last" id="last" aria-labelledby="nom"/>
+          </div>
+          <div class="formData" data-error="Veuillez entrer une adresse mail valide." data-error-visible="false">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" aria-labelledby="mail"/>
+          </div>
+          <div class="formData" data-error="Veuillez entrer 20 caractères ou plus pour le champ du message." data-error-visible="false">
+            <label for="message">Votre message</label>
+            <textarea name="message" id="message" aria-labelledby="votre message"></textarea>
+          </div>
+          <button class="contact_button" aria-label="envoie">Envoyer</button>
+        </form>
+      </div>
+    </div>
+    <script src="scripts/factories/photographer.js"></script>
+    <script src="scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
   </body>
 </html>
