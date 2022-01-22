@@ -111,33 +111,6 @@
 }
 
 /**************** Sort Medias ****************/
-/*
-#sort-medias {
-    margin-top: 20px;
-    margin-left: 100px;
-}
-
-#sort-medias label {
-    font-weight: bold;
-    font-size: 1.125em;
-}
-
-#sort-medias select {
-    background-color: #901C1C;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 1.125em;
-}
-
-#sort {
-    background-color: #901C1C;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 1.125em;
-}
-*/
 
 #sort-medias {
     position: relative;
@@ -217,6 +190,7 @@
     background-color: transparent;
     color: white;
     padding: 0px;
+    cursor: pointer;
 }
 
 #popularity {
@@ -290,6 +264,7 @@
     margin: auto;
     background-color: transparent;
     border: none;
+    cursor: pointer;
 }
 
 .fa-heart {
@@ -359,6 +334,7 @@
     left: 100%;
     background-color: transparent;
     border: 0px;
+    cursor: pointer;
 }
 
 #prev-slide {
@@ -369,6 +345,7 @@
     left: -3%;
     background-color: transparent;
     border: 0px;
+    cursor: pointer;
 }
 
 #next-slide {
@@ -379,6 +356,7 @@
     right: -3%;
     background-color: transparent;
     border: 0px;
+    cursor: pointer;
 }
 
 /**************** Contact Modal ****************/
