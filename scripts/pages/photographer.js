@@ -1,6 +1,6 @@
 async function getPhotographerProfil() {
     // les données récupérées dans le fichier json
-    return fetch("/data/photographers.json").then((response) => {
+    return fetch("data/photographers.json").then((response) => {
       if (!response.ok) {
         console.log("erreur");
       }
