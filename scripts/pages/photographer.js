@@ -187,7 +187,7 @@ async function getPhotographerProfil() {
             if (medias[currentIndex].image === undefined) {
               const videoMedia = document.createElement("video");
               const sourceMedia = document.createElement("source");
-              const pathVideo = `/assets/photographers/${newMedias[currentIndex].photographerId}/${newMedias[currentIndex].video}`;
+              const pathVideo = `assets/photographers/${newMedias[currentIndex].photographerId}/${newMedias[currentIndex].video}`;
   
               divSlide.textContent = "";
               pMedia.textContent = newMedias[currentIndex].title;
@@ -199,7 +199,7 @@ async function getPhotographerProfil() {
               divSlide.appendChild(pMedia);
             } else {
               const imgMedia = document.createElement("img");
-              const pathImage = `/assets/photographers/${newMedias[currentIndex].photographerId}/${newMedias[currentIndex].image}`;
+              const pathImage = `assets/photographers/${newMedias[currentIndex].photographerId}/${newMedias[currentIndex].image}`;
   
               divSlide.textContent = "";
               pMedia.textContent = newMedias[currentIndex].title;
@@ -227,7 +227,7 @@ async function getPhotographerProfil() {
             if (newMedias[currentIndex].image === undefined) {
               const videoMedia = document.createElement("video");
               const sourceMedia = document.createElement("source");
-              const pathVideo = `/assets/photographers/${newMedias[currentIndex].photographerId}/${newMedias[currentIndex].video}`;
+              const pathVideo = `assets/photographers/${newMedias[currentIndex].photographerId}/${newMedias[currentIndex].video}`;
   
               divSlide.textContent = "";
               pMedia.textContent = newMedias[currentIndex].title;
@@ -239,7 +239,7 @@ async function getPhotographerProfil() {
               divSlide.appendChild(pMedia);
             } else {
               const imgMedia = document.createElement("img");
-              const pathImage = `/assets/photographers/${newMedias[currentIndex].photographerId}/${newMedias[currentIndex].image}`;
+              const pathImage = `assets/photographers/${newMedias[currentIndex].photographerId}/${newMedias[currentIndex].image}`;
   
               divSlide.textContent = "";
               pMedia.textContent = newMedias[currentIndex].title;
@@ -304,7 +304,7 @@ async function getPhotographerProfil() {
         if (image === undefined) {
           const videoPic = document.createElement("video");
           const source = document.createElement("source");
-          const pathVideo = `/assets/photographers/${id}/${video}`;
+          const pathVideo = `assets/photographers/${id}/${video}`;
   
           source.setAttribute("src", pathVideo);
           videoPic.setAttribute("aria-label", title);
@@ -314,7 +314,7 @@ async function getPhotographerProfil() {
           videoPic.appendChild(source);
         } else {
           const img = document.createElement("img");
-          const pathImage = `/assets/photographers/${id}/${image}`;
+          const pathImage = `assets/photographers/${id}/${image}`;
   
           img.setAttribute("src", pathImage);
           img.setAttribute("alt", title);
@@ -392,7 +392,7 @@ async function getPhotographerProfil() {
         if (image === undefined) {
           const videoPic = document.createElement("video");
           const source = document.createElement("source");
-          const pathVideo = `/assets/photographers/${id}/${video}`;
+          const pathVideo = `assets/photographers/${id}/${video}`;
   
           aMedia.setAttribute("href", "#");
           videoPic.setAttribute("aria-label", altMedia);
@@ -403,7 +403,7 @@ async function getPhotographerProfil() {
           videoPic.appendChild(source);
         } else {
           const img = document.createElement("img");
-          const pathImage = `/assets/photographers/${id}/${image}`;
+          const pathImage = `assets/photographers/${id}/${image}`;
   
           aMedia.setAttribute("href", "#");
           img.setAttribute("src", pathImage);
