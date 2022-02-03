@@ -302,7 +302,8 @@
     height: 100%;
     margin: 0 auto;
     overflow: hidden;
-    width: 90%;
+    width: 100%;
+    display: flex;
 }
 
 #slide img {
@@ -312,9 +313,9 @@
 }
 
 #slide video {
-    height: 100%;
     object-fit: contain;
     width: 100%;
+    margin: auto;
 }
 
 #slide p {
@@ -324,6 +325,7 @@
     position: fixed;
     left: 0;
     right: 0;
+    bottom: -30px;
 }
 
 #close-slide {
@@ -331,7 +333,7 @@
     position: absolute;
     top: 0%;
     font-size: 42px;
-    left: 100%;
+    right: -10%;
     background-color: transparent;
     border: 0px;
     cursor: pointer;
@@ -340,9 +342,9 @@
 #prev-slide {
     color: #901C1C;
     position: absolute;
-    top: 50%;
+    top: 46%;
     font-size: 42px;
-    left: -3%;
+    left: -10%;
     background-color: transparent;
     border: 0px;
     cursor: pointer;
@@ -351,9 +353,9 @@
 #next-slide {
     color: #901C1C;
     position: absolute;
-    top: 50%;
+    top: 46%;
     font-size: 42px;
-    right: -3%;
+    right: -10%;
     background-color: transparent;
     border: 0px;
     cursor: pointer;
@@ -481,13 +483,7 @@ form textarea {
     opacity: 1;
 }
 
-@media screen and (max-width: 1410px){
-    .profilInformations h1 {
-        font-size: 2.5em;
-    }
-}
-
-@media screen and (max-width: 1410px){
+@media screen and (max-width: 1300px){
     #medias-photograph {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -527,38 +523,42 @@ form textarea {
     #photograph-header {
         margin: 0px;
         background-color: white;
+        height: initial;
     }
 
     #photograph-header article {
         position: relative;
-        grid-template-columns: 1fr 200px;
         height: initial;
+        display: flex;
+        flex-direction: column-reverse;
+        text-align: center;
     }
 
     #photograph-header article img {
-        width: 150px;
-        height: 150px;
+        margin-right: auto;
     }
 
-    .profilInformations h1 {
-        font-size: 1.5em;
+    .profil-informations {
+        margin-left: initial;
+    }
+
+    .profil-informations h1 {
         margin-top: 20px;
     }
 
-    .taglineProfil {
-        font-size: 1em;
+    .location-profil {
+        margin-top: initial;
     }
 
-    .locationProfil {
-        font-size: 1.1em;
+    .tagline-profil {
+        margin-top: initial;
     }
 
     #sort-medias {
         margin-left: 50px;
+        margin-top: 54px;
     }
-}
 
-@media screen and (max-width: 850px){
     #medias-photograph {
         display: block;
     }
@@ -566,49 +566,45 @@ form textarea {
 
 @media screen and (max-width: 690px) {
     .modal {
-        width: 90%;
+        width: 100%;
         margin: initial;
         border-radius: initial;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    #photograph-header article {
-        grid-template-columns: 1fr 150px;
+        padding: initial;
     }
 
-    #photograph-header article img {
-        width: 100px;
-        height: 100px;
+    .modal header {
+        display: block;
+        height: initial;
+        margin-top: initial;
     }
 
-    .profilInformations h1 {
-        margin-top: 0px;
+    .modal header h2 {
+        padding-left: 25px;
     }
-    .taglineProfil {
-        margin-top: 5px;
+
+    form {
+        width: 90%;
+        margin-top: initial;
+        margin-bottom: 30px;
     }
-    .locationProfil {
-        margin-top: 5px;
+
+    .close-contact-modal {
+        top: 20px;
+        right: 20px;
+    }
+
+    #close-slide, #next-slide {
+        right: -25%;
+    }
+
+    #prev-slide {
+        left: -25%;
     }
 }
 
 @media screen and (max-width: 540px) {
-    .modal {
-        width: 88%;
-    }
-    
     .modal header h2 {
         font-size: 35px;
-    }
-
-    form {
-        margin-top: 20px;
-    }
-    
-    .formData[data-error]::after {
-        font-size: 0.8em;
-        margin-bottom: 0px;
     }
 
     form label {
@@ -624,41 +620,88 @@ form textarea {
         font-size: 1.2em;
     }
 
+    .formData[data-error]::after {
+        font-size: 0.8em;
+        margin-bottom: 0px;
+    }
+
     .contact_button {
         height: 55px;
     }
 }
 
-@media screen and (max-width: 450px) {
-    #photograph-header article {
-        display: flex;
-        flex-direction: column-reverse;
+@media screen and (max-width: 500px) {
+    #photograph-header {
+        margin: 0px 10px;
     }
 
     #photograph-header article img {
-        margin: auto;
+        width: 150px;
+        height: 150px;
     }
 
-    .profilInformations {
-        text-align: center;
-        margin-left: 0px;
+    .profil-informations h1 {
+        font-size: 2.5em;
     }
 
-    .profilInformations h1 {
-        margin-top: 5px;
+    #sort-medias {
+        margin-left: 20px;
     }
 
-    .modal {
-        width: 85%;
+    #medias-photograph {
+        margin: 54px 0px;
+    }
+
+    .media {
+        width: 300px;
+    }
+
+    .media img, .media video {
+        width: 300px;
+        height: 250px;
+    }
+
+    .informations-media p {
+        font-size: 1.2em;
+        margin-block-start: 10px;
+        margin-block-end: 10px;
+    }
+
+    .title-media {
+        padding-right: 10px;
     }
 }
 
 @media screen and (max-width: 400px) {
+    #sort-medias, #medias-photograph {
+        margin-top: 30px;
+    }
+
+    .media {
+        width: 250px;
+    }
+
+    .media img, .media video {
+        width: 250px;
+        height: 250px;
+    }
+
+    .informations-media p, .likes button {
+        font-size: 1em;
+    }
+
     .modal header h2 {
         font-size: 25px;
+        margin-top: 75px;
+        padding-right: 60px;
+        padding-left: 15px;
     }
 
     form label {
         font-size: 20px;
+    }
+
+    form input {
+        font-size: 1em;
     }
 }
