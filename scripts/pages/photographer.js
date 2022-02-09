@@ -66,8 +66,6 @@ async function getPhotographerProfil() {
             localStorage.setItem(photographer.name, JSON.stringify(photographer));
           });
         }
-        console.log(photographer)
-        console.log(photographer.medias)
     }
   
     function sortMedias(photographer){
@@ -378,7 +376,7 @@ async function getPhotographerProfil() {
   
         articleMedia.className = "media";
         divInformationsMedia.className = "informations-media";
-        pTitle.className = "titleMedia";
+        pTitle.className = "title-media";
         divLikes.className = "likes";
   
         if(isLiked === true){
@@ -398,6 +396,7 @@ async function getPhotographerProfil() {
           videoPic.setAttribute("aria-label", altMedia);
           source.setAttribute("src", pathVideo);
           source.setAttribute("type", "video/mp4");
+          source.setAttribute("alt", altMedia)
   
           aMedia.appendChild(videoPic);
           videoPic.appendChild(source);
