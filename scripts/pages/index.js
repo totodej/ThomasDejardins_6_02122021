@@ -167,7 +167,7 @@ async function displayData(photographers) {
 }
 
 async function init() {
-  // Récupère les datas des photographes
+  // Get photographers datas
   photographerData = await getPhotographers();
   displayData(photographerData.photographers);
   filter(photographerData.photographers);

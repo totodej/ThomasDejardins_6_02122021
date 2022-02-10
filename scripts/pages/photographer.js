@@ -480,7 +480,7 @@ async function getPhotographerProfil() {
   }
   
   async function init() {
-    // Get photographers datas
+    // Get photographer datas with the id in the URL
     const photographerData = await getPhotographerProfil();
     const photographerIds = photographerData.photographers.map(
       (photographer) => photographer.id
