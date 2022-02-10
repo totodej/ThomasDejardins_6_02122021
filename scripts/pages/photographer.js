@@ -1,5 +1,6 @@
+// Get datas from json file
 async function getPhotographerProfil() {
-    // les données récupérées dans le fichier json
+
     return fetch("data/photographers.json").then((response) => {
       if (!response.ok) {
         console.log("erreur");
@@ -426,7 +427,7 @@ async function getPhotographerProfil() {
     }
   }
   
-  // display total hearts and the price per day
+  // Display total hearts and the price per day
   function displayMoreInfos(photographer, price, medias) {
     const pHeart = document.querySelector(".total-likes p");
     const pPrice = document.querySelector(".price-photographer");
@@ -440,6 +441,7 @@ async function getPhotographerProfil() {
     pPrice.textContent = price + "€ / jour";
   }
   
+  // Add medias to each photographers by id
   function getPhotographersInfoById(photographerData, id) {
     const photographer = photographerData.photographers.find(
       (photographer) => photographer.id === id
@@ -458,6 +460,7 @@ async function getPhotographerProfil() {
     return urlID;
   }
   
+  // Display the medias to the gallery
   function displayPhotographerInfo(photographer) {
     const { price, medias } = photographer;
 
@@ -477,7 +480,7 @@ async function getPhotographerProfil() {
   }
   
   async function init() {
-    // Récupère les datas des photographes
+    // Get photographers datas
     const photographerData = await getPhotographerProfil();
     const photographerIds = photographerData.photographers.map(
       (photographer) => photographer.id

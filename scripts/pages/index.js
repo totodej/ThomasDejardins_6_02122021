@@ -1,6 +1,7 @@
 let photographerData;
+
+// Get datas from json file
 async function getPhotographers() {
-  // les données récupérées dans le fichier json
   return fetch("data/photographers.json").then((response) => {
     if (!response.ok) {
       console.log("erreur");
@@ -9,7 +10,7 @@ async function getPhotographers() {
   });
 }
 
-// Filtre les photographes au clics
+// Filter the photographers on click
 async function filter(photographers) {
   const portrait = document.getElementById("portrait");
   const art = document.getElementById("art");
@@ -25,7 +26,7 @@ async function filter(photographers) {
   function addOnClick(photographers, element) {
     const selectedPhotographers = [];
     selectedTags.push(element.textContent.toLowerCase());
-    //console.log("selectedTags", selectedTags);
+
     photographers.forEach(function (photographer) {
       const photographerTag = photographer.tag;
       if (photographerTag.includes(element.textContent.toLowerCase())) {
@@ -34,11 +35,11 @@ async function filter(photographers) {
         }
       }
     });
-    //console.log("selectedPhoto", selectedPhotographers);
+
     selectedPhotographers.forEach(function (photographer) {
       filterPhotographers.push(photographer);
     });
-    //console.log("filterPho", filterPhotographers);
+
     displayData(filterPhotographers);
   }
 
@@ -153,7 +154,7 @@ async function filter(photographers) {
   });
 }
 
-// Affiche les photographes
+// Display the photographers
 async function displayData(photographers) {
   const photographersSection = document.getElementById("photographer_section");
   photographersSection.innerHTML = "";
