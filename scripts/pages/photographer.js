@@ -192,6 +192,7 @@ async function getPhotographerProfil() {
               pMedia.textContent = newMedias[currentIndex].title;
   
               sourceMedia.setAttribute("src", pathVideo);
+              sourceMedia.setAttribute("alt", newMedias[currentIndex].title)
               videoMedia.controls = "controls";
               divSlide.appendChild(videoMedia);
               videoMedia.appendChild(sourceMedia);
@@ -204,6 +205,7 @@ async function getPhotographerProfil() {
               pMedia.textContent = newMedias[currentIndex].title;
   
               imgMedia.setAttribute("src", pathImage);
+              imgMedia.setAttribute("alt", newMedias[currentIndex].title);
               divSlide.appendChild(imgMedia);
               divSlide.appendChild(pMedia);
             }
@@ -232,6 +234,7 @@ async function getPhotographerProfil() {
               pMedia.textContent = newMedias[currentIndex].title;
   
               sourceMedia.setAttribute("src", pathVideo);
+              sourceMedia.setAttribute("alt", newMedias[currentIndex].title);
               videoMedia.controls = "controls";
               divSlide.appendChild(videoMedia);
               videoMedia.appendChild(sourceMedia);
@@ -244,6 +247,7 @@ async function getPhotographerProfil() {
               pMedia.textContent = newMedias[currentIndex].title;
   
               imgMedia.setAttribute("src", pathImage);
+              imgMedia.setAttribute("alt", newMedias[currentIndex].title);
               divSlide.appendChild(imgMedia);
               divSlide.appendChild(pMedia);
             }
@@ -306,6 +310,7 @@ async function getPhotographerProfil() {
           const pathVideo = `assets/photographers/${id}/${video}`;
   
           source.setAttribute("src", pathVideo);
+          source.setAttribute("alt", title);
           videoPic.setAttribute("aria-label", title);
           videoPic.controls = "controls";
   
